@@ -28,34 +28,32 @@ import android.widget.ListView;
  */
 public class MainFragment extends ListFragment {
 
-    public interface OnListItemClickListener {
-        void onListItemClick(int position);
-    }
+  public interface OnListItemClickListener {
+    void onListItemClick(int position);
+  }
 
-    private OnListItemClickListener mItemClickListener;
+  private OnListItemClickListener mItemClickListener;
 
-    public MainFragment() {
-    }
+  public MainFragment() {
+  }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    mItemClickListener = (OnListItemClickListener) activity;
+  }
 
-        mItemClickListener = (OnListItemClickListener) activity;
-    }
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    final String[] items = getResources().getStringArray(R.array.main_items);
+    final int layout = android.R.layout.simple_list_item_1;
+    final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), layout, items);
+    setListAdapter(adapter);
+  }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final String[] items = getResources().getStringArray(R.array.main_items);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, items);
-        setListAdapter(adapter);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        mItemClickListener.onListItemClick(position);
-    }
+  @Override
+  public void onListItemClick(ListView l, View v, int position, long id) {
+    mItemClickListener.onListItemClick(position);
+  }
 }

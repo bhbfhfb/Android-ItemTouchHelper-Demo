@@ -34,38 +34,38 @@ import co.paulburke.android.itemtouchhelperdemo.helper.SimpleItemTouchHelperCall
  */
 public class RecyclerGridFragment extends Fragment implements OnStartDragListener {
 
-    private ItemTouchHelper mItemTouchHelper;
+  private ItemTouchHelper mItemTouchHelper;
 
-    public RecyclerGridFragment() {
-    }
+  public RecyclerGridFragment() {
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return new RecyclerView(container.getContext());
-    }
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return new RecyclerView(container.getContext());
+  }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
 
-        final RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this);
+    final RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this);
 
-        RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+    RecyclerView recyclerView = (RecyclerView) view;
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setAdapter(adapter);
 
-        final int spanCount = getResources().getInteger(R.integer.grid_columns);
-        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
-        recyclerView.setLayoutManager(layoutManager);
+    final int spanCount = getResources().getInteger(R.integer.grid_columns);
+    final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
+    recyclerView.setLayoutManager(layoutManager);
 
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
-    }
+    ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+    mItemTouchHelper = new ItemTouchHelper(callback);
+    mItemTouchHelper.attachToRecyclerView(recyclerView);
+  }
 
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }
+  @Override
+  public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+    mItemTouchHelper.startDrag(viewHolder);
+  }
 }
